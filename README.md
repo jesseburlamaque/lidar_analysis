@@ -1,9 +1,6 @@
-.
-├── data/                 # Dados de entrada (GeoTIFF, LAS, CSV etc.)
-├── scripts/              # Scripts de análise (R, Python, GEE)
-│   ├── 01_clip_lidar.R
-│   ├── 02_tree_segmentation.R
-│   ├── 03_agb_estimation.R
-│   └── ...
-├── outputs/              # Resultados gerados (mapas, tabelas, gráficos)
-├── README.md             # Este arquivo
+# 📡 LiDAR Data Analysis Project
+
+Este repositório contém scripts para análise de dados LiDAR aplicados a florestas tropicais, com foco em estrutura da vegetação, altura dominante, segmentação de árvores, e estimativas de biomassa acima do solo.
+
+## 📁 Estrutura do Projeto
+
