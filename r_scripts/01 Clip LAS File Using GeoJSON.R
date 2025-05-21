@@ -1,4 +1,4 @@
-#Clip LAS File Using GeoJSON  
+# Clip LAS File Using GeoJSON  
 #'  
 #' This script clips a `.laz` file using a polygon defined in a GeoJSON file.  
 #' It utilizes the `lidR` package to process the `.laz` file and the `sf` package to handle the GeoJSON polygon.  
@@ -17,37 +17,38 @@
 #' @return  
 #' A LAS object containing only the points within the polygon defined in the GeoJSON file. The clipped LAS can also be saved to a new file if specified.  
 #' 
-#' # Carregar pacotes necessários
+
+# Load required packages
 library(lidR)
 library(sf)
 
-# Definir o caminho do arquivo LAS e do GeoJSON
+# Define the path to the LAS file and the GeoJSON file
 LASfile <- "C:/Users/JesseBurlamaque/Documents/LIDAR/LiDAR/02.laz"
 GeoJSONfile <- "C:/Users/JesseBurlamaque/Documents/LIDAR/lidR-processing/ROI's/02.geojson"
 
-# Ler o arquivo LAS
+# Read the LAS file
 las <- readLAS(LASfile)
-if (is.null(las)) stop("Erro ao carregar o arquivo LAS. Verifique o caminho e o arquivo.")
+if (is.null(las)) stop("Error loading the LAS file. Check the path and the file.")
 
-# Definir o CRS do LAS como SIRGAS 2000 / UTM zone 20S (EPSG:31980)
-crs_sirgas <- st_crs(31980)  # Define o CRS como EPSG:31980
-crs(las) <- crs_sirgas       # Atribui o CRS ao arquivo LAS
+# Set the CRS of the LAS file to SIRGAS 2000 / UTM zone 20S (EPSG:31980)
+crs_sirgas <- st_crs(31980)  # Set the CRS to EPSG:31980
+crs(las) <- crs_sirgas       # Assign the CRS to the LAS file
 
-# Carregar o GeoJSON como um objeto sf
+# Load the GeoJSON as an sf object
 sf_polygon <- st_read(GeoJSONfile)
-if (is.null(sf_polygon)) stop("Erro ao carregar o GeoJSON. Verifique o caminho e o arquivo.")
+if (is.null(sf_polygon)) stop("Error loading the GeoJSON. Check the path and the file.")
 
-# Certificar-se de que o CRS do polígono coincide com o CRS do LAS
+# Ensure the polygon's CRS matches the LAS CRS
 sf_polygon <- st_transform(sf_polygon, st_crs(las))
 
-# Cortar o arquivo LAS com o polígono do GeoJSON
+# Clip the LAS file using the GeoJSON polygon
 las_cropped <- clip_roi(las, sf_polygon)
 
-# Verificar se o recorte foi bem-sucedido
-if (is.null(las_cropped)) stop("Nenhum ponto foi encontrado dentro do polígono.")
+# Check if the clipping was successful
+if (is.null(las_cropped)) stop("No points were found within the polygon.")
 
-# Salvar o arquivo LAS recortado, se necessário
+# Save the clipped LAS file, if necessary
 writeLAS(las_cropped, "C:/Users/JesseBurlamaque/Documents/LIDAR/LiDAR/croppped_laz/02_cropped.laz")
 
-# Visualizar os pontos recortados
+# Visualize the clipped points
 plot(las_cropped, bg = "white", size = 2)
