@@ -21,7 +21,7 @@ If you're trying to make sense of millions of 3D points from the sky — this re
 
 # ✨ What's Inside
 
-### [LiDAR Point Cloud Visualization and Exploration](lidar_analysis/r_scripts/00%20Explore%20LAZ.R)
+### [LiDAR Point Cloud Visualization and Exploration](/r_scripts/00%20Explore%20LAZ.R)
 
 Get an instant overview of your LiDAR data with:
 
@@ -33,7 +33,7 @@ Get an instant overview of your LiDAR data with:
 
 ---
 
-### [Clip LAS File Using GeoJSON](lidar_analysis/r_scripts/01%20Clip%20LAS%20File%20Using%20GeoJSON.R)
+### [Clip LAS File Using GeoJSON](/r_scripts/01%20Clip%20LAS%20File%20Using%20GeoJSON.R)
 
 Trim your point cloud to your area of interest using vector geometries.
 
